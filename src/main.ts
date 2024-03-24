@@ -1,3 +1,4 @@
+
 const mainBodyHeader = document.getElementsByTagName('header')[0] as HTMLElement;
 
 
@@ -10,23 +11,22 @@ mainBodyHeader.innerHTML = `
 <div class="overlay-info-container">
 <div class="small-info-container">
 <h2>IP Address</h2>
-<p id="ip-show"></p>
+<p id="ip-show"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></p>
 </div>
 <div class="small-info-container">
 <h2>Location</h2>
-<p id="location-show"></p>
+<p id="location-show"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></p>
 </div>
 <div class="small-info-container">
 <h2>Timezone</h2>
-<p id="timezone-show"></p>
+<p id="timezone-show"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></p>
 </div>
 <div class="small-info-container">
 <h2>Isp</h2>
-<p id="isp-show"></p>
+<p id="isp-show"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></p>
 </div>
 </div>
-<div class="container">
-</div>
+<div id="map"></div>
 `
 const searchButton = document.getElementById('searchButton') as HTMLButtonElement;
 const inputField = document.getElementById('inputField') as HTMLInputElement;
@@ -35,10 +35,12 @@ const locationShow = document.getElementById('location-show') as HTMLParagraphEl
 const timeZoneShow = document.getElementById('timezone-show') as HTMLParagraphElement;
 const ispShow = document.getElementById('isp-show') as HTMLParagraphElement;
 
+let latData: any;
+let lngData: any;
 
-const getIpData = async (userSearchQuery) => {
+const getIpData = async (userSearchQuery:any) => {
     await fetch (
-        `https://geo.ipify.org/api/v2/country?apiKey=at_B9bmyccR4ayluqaLqfVVPuqtxpHqp&domain=${userSearchQuery}`
+        `https://geo.ipify.org/api/v2/country,city?apiKey=at_B9bmyccR4ayluqaLqfVVPuqtxpHqp&domain=${userSearchQuery}`
     )
     .then((response) => response.json())
     .then ((data) => {
@@ -46,6 +48,18 @@ const getIpData = async (userSearchQuery) => {
         locationShow.innerText = data.location.region;
         timeZoneShow.innerText = data.location.timezone;
         ispShow.innerText = data.isp;
+        latData = data.location.lat;
+        lngData = data.location.lng;   
+        
+        if(data.isp.length > 25) {
+            ispShow.style.fontSize = '12px';
+        } else {
+            ispShow.style.fontSize = '22px';
+        }
+
+    
+        
+        
     })
 }
 
@@ -53,11 +67,12 @@ if (inputField.value === '') {
     getIpData('')
 } 
   
+
+
   searchButton.addEventListener('click', () => {
     getIpData(inputField.value)
+
+   
 })
-
-
-
 
 
