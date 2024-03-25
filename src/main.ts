@@ -35,8 +35,6 @@ const locationShow = document.getElementById('location-show') as HTMLParagraphEl
 const timeZoneShow = document.getElementById('timezone-show') as HTMLParagraphElement;
 const ispShow = document.getElementById('isp-show') as HTMLParagraphElement;
 
-let latData: any;
-let lngData: any;
 
 const getIpData = async (userSearchQuery:any) => {
     await fetch (
@@ -48,31 +46,45 @@ const getIpData = async (userSearchQuery:any) => {
         locationShow.innerText = data.location.region;
         timeZoneShow.innerText = data.location.timezone;
         ispShow.innerText = data.isp;
-        latData = data.location.lat;
-        lngData = data.location.lng;   
-        
+        const latData = data.location.lat;
+        const lngData = data.location.lng;   
+      
         if(data.isp.length > 25) {
             ispShow.style.fontSize = '12px';
         } else {
             ispShow.style.fontSize = '22px';
         }
 
-    
-        
+        const mapContainer = document.getElementById('map') as HTMLElement;
+        if (mapContainer) {
+            // Check if map is already initialized on this container
+            if ((mapContainer as any)._leaflet_id) {
+                // If map is already initialized, remove it
+                (mapContainer as any)._leaflet_id = null;
+                mapContainer.innerHTML = '';
+            }
+            // Initialize the map
+            const map = L.map('map').setView([latData, lngData], 9);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map)
+            L.marker([latData, lngData]).addTo(map);
+        }
         
     })
+   
 }
 
 if (inputField.value === '') {
     getIpData('')
 } 
+
   
 
 
   searchButton.addEventListener('click', () => {
     getIpData(inputField.value)
-
-   
+   inputField.value = '';
 })
-
 

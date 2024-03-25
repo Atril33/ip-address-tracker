@@ -41,8 +41,6 @@ const ipShow = document.getElementById('ip-show');
 const locationShow = document.getElementById('location-show');
 const timeZoneShow = document.getElementById('timezone-show');
 const ispShow = document.getElementById('isp-show');
-let latData;
-let lngData;
 const getIpData = (userSearchQuery) => __awaiter(void 0, void 0, void 0, function* () {
     yield fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_B9bmyccR4ayluqaLqfVVPuqtxpHqp&domain=${userSearchQuery}`)
         .then((response) => response.json())
@@ -51,13 +49,29 @@ const getIpData = (userSearchQuery) => __awaiter(void 0, void 0, void 0, functio
         locationShow.innerText = data.location.region;
         timeZoneShow.innerText = data.location.timezone;
         ispShow.innerText = data.isp;
-        latData = data.location.lat;
-        lngData = data.location.lng;
+        const latData = data.location.lat;
+        const lngData = data.location.lng;
         if (data.isp.length > 25) {
             ispShow.style.fontSize = '12px';
         }
         else {
             ispShow.style.fontSize = '22px';
+        }
+        const mapContainer = document.getElementById('map');
+        if (mapContainer) {
+            // Check if map is already initialized on this container
+            if (mapContainer._leaflet_id) {
+                // If map is already initialized, remove it
+                mapContainer._leaflet_id = null;
+                mapContainer.innerHTML = '';
+            }
+            // Initialize the map
+            const map = L.map('map').setView([latData, lngData], 9);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+            L.marker([latData, lngData]).addTo(map);
         }
     });
 });
@@ -66,4 +80,5 @@ if (inputField.value === '') {
 }
 searchButton.addEventListener('click', () => {
     getIpData(inputField.value);
+    inputField.value = '';
 });
