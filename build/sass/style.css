@@ -87,4 +87,39 @@ header h1 {
   margin-top: 10px;
   font-size: 22px;
   font-weight: 500;
+}
+
+#map {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: -1;
+}
+
+@media screen and (max-width: 768px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+  .input-container #inputField {
+    width: 300px;
+  }
+  .overlay-info-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .small-info-container {
+    width: 100%;
+    border: 0;
+    margin-top: 20px;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 375px) {
+  .input-container #inputField {
+    width: 70%;
+  }
+  .overlay-info-container {
+    padding: 20px 10px;
+  }
 }/*# sourceMappingURL=style.css.map */
