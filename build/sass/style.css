@@ -8,6 +8,7 @@
 body {
   background: hsl(0, 0%, 59%);
   font-family: "Rubik", sans-serif;
+  height: 100vh;
 }
 
 header {
@@ -89,10 +90,16 @@ header h1 {
   font-weight: 500;
 }
 
+.map-container-manual {
+  width: 100%;
+  height: auto;
+  background: blue;
+  margin-top: -60px;
+  z-index: -1;
+}
+
 #map {
   height: 100vh;
-  width: 100vw;
-  position: absolute;
   z-index: -1;
 }
 
@@ -113,6 +120,13 @@ header h1 {
     border: 0;
     margin-top: 20px;
     padding: 0;
+  }
+  .map-container-manual {
+    margin-top: -345px;
+  }
+  #map {
+    height: 1000px;
+    width: 100vw;
   }
 }
 @media screen and (max-width: 375px) {

@@ -13,6 +13,7 @@ $third_color: hsl(240, 50%, 1%);
 body {
     background: $secondary_color;
     font-family: "Rubik", sans-serif;
+    height: 100vh;
 }
 
 header {
@@ -103,14 +104,21 @@ header {
 
 }
 
+.map-container-manual {
+ width: 100%;
+ height: auto;
+ background: blue;
+ margin-top: -60px;
+ z-index: -1;
+}
+
 #map { 
     height: 100vh;
-    width: 100vw;
-    position: absolute;
     z-index: -1;
 }
 
 @media screen and (max-width: 768px) {
+
     header {
         h1 {
             font-size: 1.50rem;
@@ -134,6 +142,15 @@ header {
         border: 0;
         margin-top: 20px;
         padding: 0;
+    }
+
+    .map-container-manual {
+        margin-top: -345px;
+    }
+
+    #map { 
+        height: 1000px;
+        width: 100vw;
     }
 }
 

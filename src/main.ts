@@ -26,7 +26,9 @@ mainBodyHeader.innerHTML = `
 <p id="isp-show"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></p>
 </div>
 </div>
+<div class="map-container-manual">
 <div id="map"></div>
+</div>
 `
 const searchButton = document.getElementById('searchButton') as HTMLButtonElement;
 const inputField = document.getElementById('inputField') as HTMLInputElement;
@@ -35,56 +37,58 @@ const locationShow = document.getElementById('location-show') as HTMLParagraphEl
 const timeZoneShow = document.getElementById('timezone-show') as HTMLParagraphElement;
 const ispShow = document.getElementById('isp-show') as HTMLParagraphElement;
 
-
-const getIpData = async (userSearchQuery:any) => {
-    await fetch (
-        `https://geo.ipify.org/api/v2/country,city?apiKey=at_B9bmyccR4ayluqaLqfVVPuqtxpHqp&domain=${userSearchQuery}`
-    )
-    .then((response) => response.json())
-    .then ((data) => {
-        ipShow.innerText = data.ip;
-        locationShow.innerText = data.location.region;
-        timeZoneShow.innerText = data.location.timezone;
-        ispShow.innerText = data.isp;
-        const latData = data.location.lat;
-        const lngData = data.location.lng;   
+ /* const getIpData = async (userSearchQuery:any) => {
+     await fetch (
+         `https://geo.ipify.org/api/v2/country,city?apiKey=Aat_B9bmyccR4ayluqaLqfVVPuqtxpHqp&domain=${userSearchQuery}`
+     )
+     .then((response) => response.json())
+     .then ((data) => {
+         ipShow.innerText = data.ip;
+         locationShow.innerText = data.location.region;
+         timeZoneShow.innerText = data.location.timezone;
+         ispShow.innerText = data.isp;
+         const latData = data.location.lat;
+         const lngData = data.location.lng;   
       
-        if(data.isp.length > 25) {
-            ispShow.style.fontSize = '12px';
-        } else {
-            ispShow.style.fontSize = '22px';
-        }
+         if(data.isp.length > 25) {
+             ispShow.style.fontSize = '12px';
+         } else {
+             ispShow.style.fontSize = '22px';
+         }
 
-        const mapContainer = document.getElementById('map') as HTMLElement;
-        if (mapContainer) {
-            // Check if map is already initialized on this container
-            if ((mapContainer as any)._leaflet_id) {
-                // If map is already initialized, remove it
-                (mapContainer as any)._leaflet_id = null;
-                mapContainer.innerHTML = '';
-            }
-            // Initialize the map
-            const map = L.map('map').setView([latData, lngData], 9);
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map)
-            L.marker([latData, lngData]).addTo(map);
-        }
-        
-    })
-   
-}
+         const mapContainer = document.getElementById('map') as HTMLElement;
+         if (mapContainer) {
+             if ((mapContainer as any)._leaflet_id) {
+                 (mapContainer as any)._leaflet_id = null;
+                 mapContainer.innerHTML = '';
+             }
+ 
+             const map = L.map('map').setView([latData, lngData], 9);
+             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                 maxZoom: 19,
+                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+             }).addTo(map)
+             L.marker([latData, lngData]).addTo(map);
+         }      
+     }) 
+ }
 
-if (inputField.value === '') {
-    getIpData('')
-} 
+ if (inputField.value === '') {
+     getIpData('')
+ }  
 
   
 
 
-  searchButton.addEventListener('click', () => {
-    getIpData(inputField.value)
-   inputField.value = '';
-})
+   searchButton.addEventListener('click', () => {
+     getIpData(inputField.value)
+    inputField.value = '';
+ }) */
 
+var map = L.map('map').setView([51.505, -0.09], 13);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+var marker = L.marker([51.505, -0.09]).addTo(map);
+console.log(marker)
