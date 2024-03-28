@@ -36,6 +36,7 @@ mainBodyHeader.innerHTML = `
 <div class="map-container-manual">
 <div id="map"></div>
 </div>
+<a href="#"><img src="assets/icon-arrow.svg" class="top-up" alt="Top Up Icon"></a>
 `;
 const searchButton = document.getElementById('searchButton');
 const inputField = document.getElementById('inputField');
