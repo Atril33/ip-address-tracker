@@ -103,6 +103,17 @@ header h1 {
   z-index: -1;
 }
 
+.top-up {
+  position: absolute;
+  background-color: rgb(85, 85, 209);
+  right: 20px;
+  bottom: -635px;
+  transform: rotate(-90deg);
+  padding: 10px;
+  border-radius: 2px;
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   header h1 {
     font-size: 1.5rem;
@@ -127,6 +138,9 @@ header h1 {
   #map {
     height: 1000px;
     width: 100vw;
+  }
+  .top-up {
+    display: block;
   }
 }
 @media screen and (max-width: 375px) {
