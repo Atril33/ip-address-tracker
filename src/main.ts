@@ -39,7 +39,7 @@ const ispShow = document.getElementById('isp-show') as HTMLParagraphElement;
 
  const getIpData = async (userSearchQuery:any) => {
      await fetch (
-         `https://geo.ipify.org/api/v2/country,city?apiKey=at_B9bmyccR4ayluqaLqfVVPuqtxpHqp&domain=${userSearchQuery}`
+         `https://geo.ipify.org/api/v2/country,city?apiKey=at_obJq6ldbV311b7LxGX4Sg8So5znoD&domain=${userSearchQuery}`
      )
      .then((response) => response.json())
      .then ((data) => {
@@ -85,9 +85,3 @@ const ispShow = document.getElementById('isp-show') as HTMLParagraphElement;
     inputField.value = '';
  }) 
 
-var map = L.map('map').setView([51.505, -0.09], 13);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-var marker = L.marker([51.505, -0.09]).addTo(map);
