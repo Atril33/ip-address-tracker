@@ -44,7 +44,7 @@ const locationShow = document.getElementById('location-show');
 const timeZoneShow = document.getElementById('timezone-show');
 const ispShow = document.getElementById('isp-show');
 const getIpData = (userSearchQuery) => __awaiter(void 0, void 0, void 0, function* () {
-    yield fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_B9bmyccR4ayluqaLqfVVPuqtxpHqp&domain=${userSearchQuery}`)
+    yield fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_obJq6ldbV311b7LxGX4Sg8So5znoD&domain=${userSearchQuery}`)
         .then((response) => response.json())
         .then((data) => {
         ipShow.innerText = data.ip;
@@ -81,9 +81,3 @@ searchButton.addEventListener('click', () => {
     getIpData(inputField.value);
     inputField.value = '';
 });
-var map = L.map('map').setView([51.505, -0.09], 13);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-var marker = L.marker([51.505, -0.09]).addTo(map);

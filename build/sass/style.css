@@ -93,7 +93,7 @@ header h1 {
 .map-container-manual {
   width: 100%;
   height: auto;
-  background: blue;
+  background: #ccc6c6;
   margin-top: -60px;
   z-index: -1;
 }
